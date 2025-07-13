@@ -35,10 +35,6 @@ const Footer = () => {
           <div>
             <h3 className="text-white font-semibold mb-4">Support</h3>
             <ul className="space-y-2 text-gray-400">
-              <li><a href="#" className="hover:text-purple-400 transition-colors">Help Center</a></li>
-              <li><a href="#" className="hover:text-purple-400 transition-colors">Contact Us</a></li>
-              <li><a href="#" className="hover:text-purple-400 transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-purple-400 transition-colors">Terms of Service</a></li>
             </ul>
           </div>
         </div>
