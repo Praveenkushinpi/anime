@@ -1,4 +1,4 @@
-'use client'
+   <div>page</div>'use client'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Search, TrendingUp, Sparkles, Users, Star, Flame, Play } from 'lucide-react'
@@ -195,13 +195,6 @@ export default function HomePage() {
               >
                 <Search className="h-5 w-5 mr-2" />
                 Start Exploring
-              </Link>
-              <Link
-                href="/community"
-                className="inline-flex items-center px-8 py-4 bg-transparent border-2 border-purple-400 text-purple-400 rounded-lg hover:bg-purple-400 hover:text-white transition-all duration-300 font-semibold"
-              >
-                <Users className="h-5 w-5 mr-2" />
-                Join Community
               </Link>
             </div>
           </div>
