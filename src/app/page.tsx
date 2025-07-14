@@ -1,4 +1,4 @@
-'use client'
+   <div>page</div>'use client'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Search, TrendingUp, Sparkles, Users, Star, Flame, Play } from 'lucide-react'
