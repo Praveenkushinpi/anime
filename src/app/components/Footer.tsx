@@ -1,4 +1,4 @@
-import { Star, Heart, Github, Twitter } from 'lucide-react'
+import { Star, Heart } from 'lucide-react'
 
 const Footer = () => {
   return (
