@@ -77,7 +77,6 @@ const STATUS_OPTIONS = [
   { value: 'upcoming', label: 'Upcoming' }
 ]
 
-
 const SORT_OPTIONS = [
   { value: '-userCount', label: 'Most Popular' },
   { value: '-averageRating', label: 'Highest Rated' },
@@ -87,6 +86,15 @@ const SORT_OPTIONS = [
   { value: '-canonicalTitle', label: 'Z-A' }
 ]
 
+// Generate year options for the select dropdown
+const generateYearOptions = () => {
+  const currentYear = new Date().getFullYear()
+  const years = []
+  for (let year = currentYear; year >= 1950; year--) {
+    years.push(year)
+  }
+  return years
+}
 
 type Anime = {
   mal_id: number
@@ -140,8 +148,8 @@ export default function SearchPage() {
     showType: ''
   })
 
+  const yearOptions = useMemo(() => generateYearOptions(), [])
 
-  
   function debounce<
   T extends (query: string, filters: FilterType, page: number) => void
 >(func: T, wait: number) {
@@ -229,7 +237,6 @@ const debouncedSearch = useMemo(
     debouncedSearch(newQuery, filters, 1)
   }
 
-
   const handleFilterChange = (key: string, value: string) => {
     const newFilters = { ...filters, [key]: value }
     setFilters(newFilters)
@@ -259,6 +266,7 @@ const debouncedSearch = useMemo(
       performSearch(query, filters, nextPage)
     }
   }
+  
   useEffect(() => {
     performSearch('', filters, 1)
   }, [filters, performSearch])
@@ -313,7 +321,7 @@ const debouncedSearch = useMemo(
                     <select
                       value={filters.status}
                       onChange={(e) => handleFilterChange('status', e.target.value)}
-                      className="w-full glass-effect rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-600"
+                      className="w-full bg-gray-800 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-600"
                     >
                       <option value="">All Status</option>
                       {STATUS_OPTIONS.map(option => (
@@ -327,7 +335,7 @@ const debouncedSearch = useMemo(
                     <select
                       value={filters.showType}
                       onChange={(e) => handleFilterChange('showType', e.target.value)}
-                      className="w-full glass-effect rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-600"
+                      className="w-full bg-gray-800 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-600"
                     >
                       <option value="">All Types</option>
                       <option value="TV">TV Series</option>
@@ -340,13 +348,16 @@ const debouncedSearch = useMemo(
 
                   <div>
                     <label className="block text-sm font-medium text-gray-300 mb-2">Year</label>
-                    <input
-                      type="number"
-                      placeholder="e.g., 2023"
+                    <select
                       value={filters.year}
                       onChange={(e) => handleFilterChange('year', e.target.value)}
-                      className="w-full glass-effect rounded-lg px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-600"
-                    />
+                      className="w-full bg-gray-800 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-600"
+                    >
+                      <option value="">All Years</option>
+                      {yearOptions.map(year => (
+                        <option key={year} value={year.toString()}>{year}</option>
+                      ))}
+                    </select>
                   </div>
                 </div>
 
@@ -361,7 +372,7 @@ const debouncedSearch = useMemo(
                       max="10"
                       value={filters.minScore}
                       onChange={(e) => handleFilterChange('minScore', e.target.value)}
-                      className="w-full glass-effect rounded-lg px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-600"
+                      className="w-full bg-gray-800 rounded-lg px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-600"
                     />
                   </div>
 
@@ -375,7 +386,7 @@ const debouncedSearch = useMemo(
                       max="10"
                       value={filters.maxScore}
                       onChange={(e) => handleFilterChange('maxScore', e.target.value)}
-                      className="w-full glass-effect rounded-lg px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-600"
+                      className="w-full bg-gray-800 rounded-lg px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-600"
                     />
                   </div>
 
@@ -384,7 +395,7 @@ const debouncedSearch = useMemo(
                     <select
                       value={filters.sort}
                       onChange={(e) => handleFilterChange('sort', e.target.value)}
-                      className="w-full glass-effect rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-600"
+                      className="w-full bg-gray-800 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 border border-gray-600"
                     >
                       {SORT_OPTIONS.map(option => (
                         <option key={option.value} value={option.value}>{option.label}</option>
