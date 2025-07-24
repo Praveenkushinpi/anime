@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { createContext, useContext } from "react"
 import { useWatchlist } from "../hooks/useWatchlist"
 
@@ -46,8 +46,6 @@ export const WatchlistProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
 export const useWatchlistContext = () => {
   const context = useContext(WatchlistContext)
-  if (context === undefined) {
-    throw new Error('useWatchlistContext must be used within a WatchlistProvider')
-  }
+  if (!context) throw new Error("useWatchlistContext must be used inside WatchlistProvider")
   return context
 }
